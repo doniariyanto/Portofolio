@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="id" data-reality="lab">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portofolio Doni Ariyanto - IT & Telecommunications Professional (Network Operations, FTTH/GPON, Quality Engineering)." />
+  <title>DONI ARIYANTO // NETWORK ENGINEER, .</title>
+
+  <!-- Google Fonts: Space Grotesk (Display) & JetBrains Mono (Technical HUD) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* ==========================================================================
+       3 REALITY THEMES (Matching the 3 panels in the reference image)
+       1. data-reality="lab"       -> Panel Atas (Clean White/Stone Tech Lab)
+       2. data-reality="cyber"     -> Panel Tengah (Pitch Black Neon Cyber HUD)
+       3. data-reality="blueprint" -> Panel Bawah (White/Royal Blue CAD Grid)
+       ========================================================================== */
+    :root,
+    [data-reality="lab"] {
+      --bg-main: #f4f5f0;
+      --bg-panel: rgba(255, 255, 255, 0.88);
+      --bg-tag: #14171a;
+      --text-tag: #f4f5f0;
+      --text-main: #14171a;
+      --text-muted: #5a626a;
+      --accent: #ff4d1c;       /* Red-orange flower accent from panel 1 */
+      --accent-sec: #1f6feb;
+      --line-color: #14171a;
+      --border-color: #14171a;
+      --grid-color: rgba(20, 23, 26, 0.05);
+      --core-glow: rgba(255, 77, 28, 0.18);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-reality="cyber"] {
+      --bg-main: #05070a;
+      --bg-panel: rgba(10, 16, 24, 0.86);
+      --bg-tag: #2dd4bf;
+      --text-tag: #041311;
+      --text-main: #ecfDF5;
+      --text-muted: #7dd3fc;
+      --accent: #2dd4bf;       /* Bioluminescent cyan/green from panel 2 */
+      --accent-sec: #c084fc;   /* Iridescent purple accent */
+      --line-color: rgba(45, 212, 191, 0.65);
+      --border-color: #2dd4bf;
+      --grid-color: rgba(45, 212, 191, 0.07);
+      --core-glow: rgba(45, 212, 191, 0.32);
+    }
+
+    [data-reality="blueprint"] {
+      --bg-main: #f8faff;
+      --bg-panel: rgba(248, 250, 255, 0.92);
+      --bg-tag: #1d4ed8;
+      --text-tag: #ffffff;
+      --text-main: #1e3a8a;
+      --text-muted: #3b82f6;
+      --accent: #1d4ed8;       /* Blueprint CAD royal blue from panel 3 */
+      --accent-sec: #2563eb;
+      --line-color: #1d4ed8;
+      --border-color: #1d4ed8;
+      --grid-color: rgba(29, 78, 216, 0.11);
+      --core-glow: rgba(29, 78, 216, 0.15);
+    }
+
+    /* ==========================================================================
+       RESET & BASE
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 4.5rem;
+      font-family: var(--font-mono);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+      background-size: 36px 36px;
+      min-height: 100vh;
+    }
+
+    :focus-visible {
+      outline: 2px dashed var(--accent);
+      outline-offset: 4px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ==========================================================================
+       TOP HUD BAR (SUTÉRA STYLE)
+       ========================================================================== */
+    .hud-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      padding: 1rem 1.75rem;
+      pointer-events: none;
+    }
+
+    .hud-header > * {
+      pointer-events: auto;
+    }
+
+    .hud-brand {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-panel);
+      padding: 0.35rem 0.65rem;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+    }
+
+    .hud-center-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .reality-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--bg-panel);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0 var(--border-color);
+    }
+
+    .reality-btn:hover {
+      background: var(--bg-tag);
+      color: var(--text-tag);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--accent);
+    }
+
+    .reality-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--border-color);
+    }
+
+    .wireframe-globe {
+      font-size: 1rem;
+      color: var(--text-main);
+      animation: spinSlow 14s linear infinite;
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hud-clock {
+      justify-self: end;
+      text-align: right;
+      font-size: 0.7rem;
+      line-height: 1.35;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--bg-panel);
+      padding: 0.35rem 0.65rem;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Quick Section Anchor Bar */
+    .hud-nav {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 990;
+      display: flex;
+      gap: 0.25rem;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      padding: 0.3rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 4px 4px 0 var(--border-color);
+    }
+
+    .hud-nav a {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.45rem 0.75rem;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .hud-nav a:hover,
+    .hud-nav a.active {
+      background: var(--bg-tag);
+      color: var(--text-tag);
+    }
+
+    /* ==========================================================================
+       HERO POSTER STAGE (Exact layout of "REALITY, BY DESIGN.")
+       ========================================================================== */
+    .hero-stage {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 5.25rem 1.75rem 5.5rem;
+      display: grid;
+      grid-template-columns: 320px 1fr 340px;
+      grid-template-rows: auto 1fr auto;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    /* Top-Left Giant Display Title */
+    .hero-headline-box {
+      grid-column: 1 / 3;
+      grid-row: 1;
+      align-self: start;
+      z-index: 5;
+    }
+
+    .hero-display-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5.5vw, 4.75rem);
+      font-weight: 700;
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      display: inline-block;
+      position: relative;
+    }
+
+    [data-reality="blueprint"] .hero-display-title {
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .title-badge {
+      display: inline-block;
+      vertical-align: middle;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.45rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-panel);
+      margin-left: 0.5rem;
+      transform: translateY(-0.6rem);
+    }
+
+    /* Top-Right Definition Card */
+    .definition-box {
+      grid-column: 3;
+      grid-row: 1;
+      align-self: end;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      font-size: 0.72rem;
+      z-index: 5;
+      box-shadow: 4px 4px 0 var(--border-color);
+    }
+
+    .def-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+
+    .def-header span.code {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      opacity: 0.75;
+    }
+
+    .def-body {
+      padding: 0.75rem;
+      line-height: 1.55;
+      text-transform: uppercase;
+    }
+
+    .def-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0.75rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.65rem;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .barcode-bars {
+      display: inline-flex;
+      gap: 2px;
+      height: 10px;
+      align-items: flex-end;
+    }
+    .barcode-bars i {
+      width: 2px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    /* Left Middle Schematic Widget */
+    .left-schematic-widget {
+      grid-column: 1;
+      grid-row: 2;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      z-index: 5;
+      font-size: 0.68rem;
+    }
+
+    .window-bar {
+      background: var(--bg-tag);
+      color: var(--text-tag);
+      padding: 0.3rem 0.6rem;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .schematic-content {
+      padding: 0.75rem;
+    }
+
+    .signal-canvas-box {
+      width: 100%;
+      height: 110px;
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+      background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+      background-size: 12px 12px;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      padding: 0.2rem 0;
+      border-bottom: 1px dotted var(--border-color);
+    }
+
+    /* Center Interactive Network Core & Callout Lines */
+    .center-core-stage {
+      grid-column: 1 / 4;
+      grid-row: 1 / 4;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 540px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .core-svg-wrapper {
+      width: 100%;
+      max-width: 920px;
+      height: auto;
+      pointer-events: auto;
+    }
+
+    .core-svg-wrapper svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .svg-callout-line {
+      fill: none;
+      stroke: var(--line-color);
+      stroke-width: 1.2;
+      transition: stroke 0.3s ease;
+    }
+
+    .svg-node-box {
+      fill: var(--bg-main);
+      stroke: var(--border-color);
+      stroke-width: 1.4;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .svg-node-box:hover {
+      fill: var(--accent);
+    }
+
+    .svg-callout-text {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      fill: var(--text-main);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .svg-callout-sub {
+      font-family: var(--font-mono);
+      font-size: 7px;
+      fill: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .core-pulse-ring {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.2;
+      stroke-dasharray: 6 4;
+      transform-origin: 450px 270px;
+      animation: rotateCore 24s linear infinite;
+    }
+
+    .core-pulse-ring-reverse {
+      fill: none;
+      stroke: var(--border-color);
+      stroke-width: 1;
+      stroke-dasharray: 3 8;
+      transform-origin: 450px 270px;
+      animation: rotateCoreReverse 18s linear infinite;
+    }
+
+    @keyframes rotateCore {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes rotateCoreReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    /* Right Telemetry / Optical Power Meter Widget */
+    .right-telemetry-widget {
+      grid-column: 3;
+      grid-row: 2;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      z-index: 5;
+      font-size: 0.68rem;
+      justify-self: end;
+      width: 100%;
+    }
+
+    .bars-chart {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 75px;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+      gap: 6px;
+    }
+
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .bar-fill {
+      width: 6px;
+      background: var(--accent);
+      transition: height 0.6s ease;
+    }
+
+    .bar-label {
+      font-size: 0.55rem;
+      color: var(--text-muted);
+    }
+
+    /* Bottom-Left: [ CORE THREADS OF MY WORK ] */
+    .core-threads-box {
+      grid-column: 1;
+      grid-row: 3;
+      align-self: end;
+      z-index: 5;
+      background: var(--bg-panel);
+      padding: 0.85rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .threads-heading {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.65rem;
+    }
+
+    .thread-item {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 0.6rem;
+      align-items: center;
+      padding: 0.35rem 0;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+    }
+
+    .thread-icon {
+      width: 32px;
+      height: 28px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .thread-meta {
+      font-size: 0.58rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .thread-name {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    /* Bottom-Right: [ NOT A STUDIO — JUST ME ] Bio Window */
+    .bio-window-box {
+      grid-column: 3;
+      grid-row: 3;
+      align-self: end;
+      z-index: 5;
+    }
+
+    .bio-window {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      box-shadow: 4px 4px 0 var(--border-color);
+    }
+
+    .bio-text {
+      padding: 0.85rem;
+      font-size: 0.72rem;
+      line-height: 1.55;
+    }
+
+    .bio-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .bio-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      background: var(--bg-panel);
+      transition: all 0.2s ease;
+    }
+
+    .bio-pill:hover {
+      background: var(--bg-tag);
+      color: var(--text-tag);
+    }
+
+    /* ==========================================================================
+       DETAILED CV SECTIONS BELOW THE FOLD (Schematic / Blueprint Grid Style)
+       ========================================================================== */
+    .cv-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.75rem 6rem;
+    }
+
+    .schematic-section {
+      margin-top: 4.5rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-panel);
+      box-shadow: 6px 6px 0 var(--border-color);
+    }
+
+    .schematic-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-tag);
+      color: var(--text-tag);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .schematic-section-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .schematic-code {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Experience Grid */
+    .exp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    }
+
+    .exp-node {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .exp-node:last-child {
+      border-right: none;
+    }
+
+    .exp-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .exp-date-tag {
+      background: var(--accent);
+      color: #ffffff;
+      padding: 0.15rem 0.5rem;
+      font-weight: 700;
+      font-size: 0.65rem;
+    }
+    [data-reality="cyber"] .exp-date-tag {
+      color: #041311;
+    }
+
+    .exp-role {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .exp-company {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .exp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .exp-list li {
+      position: relative;
+      padding-left: 1.1rem;
+    }
+
+    .exp-list li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Education & Skills Split */
+    .edu-skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+    }
+
+    .edu-pane {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .skills-pane {
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skill-group-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--accent);
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tech-chip {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.55rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-main);
+      transition: all 0.2s;
+    }
+
+    .tech-chip:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* Projects / Field Logs Grid */
+    .projects-schematic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .project-node {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .project-node:last-child {
+      border-right: none;
+    }
+
+    .project-diagram-preview {
+      height: 130px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-main);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       FIELD DOCUMENTATION PHOTO GALLERY (NEW SECTION INTEGRATED IN 03)
+       ========================================================================== */
+    .doc-sub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-main);
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .doc-sub-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .doc-sub-title i {
+      color: var(--accent);
+    }
+
+    .doc-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .doc-filter-btn {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.35rem 0.7rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-panel);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .doc-filter-btn:hover,
+    .doc-filter-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--border-color);
+    }
+
+    [data-reality="cyber"] .doc-filter-btn:hover,
+    [data-reality="cyber"] .doc-filter-btn.active {
+      color: #041311;
+    }
+
+    .doc-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      padding: 1.5rem;
+    }
+
+    .doc-card {
+      border: 1px solid var(--border-color);
+      background: var(--bg-main);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .doc-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 4px 4px 0 var(--accent);
+    }
+
+    .doc-card.hidden {
+      display: none;
+    }
+
+    .doc-img-box {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+      background: #0b0e14;
+    }
+
+    .doc-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease, filter 0.35s ease;
+    }
+
+    .doc-card:hover .doc-img-box img {
+      transform: scale(1.04);
+    }
+
+    .doc-hud-badge {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      background: var(--bg-tag);
+      color: var(--text-tag);
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--border-color);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .doc-zoom-icon {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      background: var(--bg-panel);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      z-index: 2;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .doc-card:hover .doc-zoom-icon {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .doc-info {
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+    }
+
+    .doc-meta-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.64rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .doc-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+
+    .doc-desc {
+      font-size: 0.72rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 10, 0.88);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .lightbox-modal.open {
+      display: flex;
+    }
+
+    .lightbox-window {
+      max-width: 920px;
+      width: 100%;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      box-shadow: 8px 8px 0 var(--accent);
+      overflow: hidden;
+    }
+
+    .lightbox-body {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      background: var(--bg-main);
+    }
+
+    .lightbox-img-container {
+      background: #05070a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 75vh;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .lightbox-img-container img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lightbox-details {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .lightbox-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-tag);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0.1rem 0.4rem;
+    }
+
+    .lightbox-close-btn:hover {
+      color: var(--accent);
+    }
+
+    /* Contact Terminal */
+    .contact-schematic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+    }
+
+    .contact-direct-pane {
+      padding: 1.5rem;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+    }
+
+    .terminal-row {
+      padding: 0.65rem 0;
+      border-bottom: 1px dashed var(--border-color);
+      font-size: 0.8rem;
+    }
+
+    .terminal-label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-form-pane {
+      padding: 1.5rem;
+    }
+
+    .hud-input {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: var(--bg-main);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      margin-top: 0.3rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .hud-submit-btn {
+      width: 100%;
+      padding: 0.8rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--bg-tag);
+      color: var(--text-tag);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .hud-submit-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN
+       ========================================================================== */
+    @media (max-width: 1080px) {
+      .hero-stage {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        padding-top: 6rem;
+      }
+      .hero-headline-box {
+        grid-column: 1 / 3;
+        grid-row: 1;
+      }
+      .center-core-stage {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        min-height: 380px;
+      }
+      .definition-box {
+        grid-column: 1;
+        grid-row: 3;
+      }
+      .right-telemetry-widget {
+        grid-column: 2;
+        grid-row: 3;
+      }
+      .left-schematic-widget {
+        grid-column: 1;
+        grid-row: 4;
+      }
+      .core-threads-box {
+        grid-column: 2;
+        grid-row: 4;
+      }
+      .bio-window-box {
+        grid-column: 1 / 3;
+        grid-row: 5;
+      }
+      .edu-skills-grid,
+      .contact-schematic-grid,
+      .lightbox-body {
+        grid-template-columns: 1fr;
+      }
+      .edu-pane,
+      .contact-direct-pane,
+      .exp-node,
+      .project-node,
+      .lightbox-img-container {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hud-header {
+        grid-template-columns: 1fr auto;
+        gap: 0.5rem;
+      }
+      .hud-clock {
+        display: none;
+      }
+      .hero-stage {
+        grid-template-columns: 1fr;
+      }
+      .hero-headline-box,
+      .center-core-stage,
+      .definition-box,
+      .right-telemetry-widget,
+      .left-schematic-widget,
+      .core-threads-box,
+      .bio-window-box {
+        grid-column: 1;
+      }
+      .hud-nav {
+        width: 94%;
+        justify-content: space-around;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP FIXED HUD HEADER (Matches SUTÉRA Header)
+       ======================================================================== -->
+  <header class="hud-header">
+    <a href="#top" class="hud-brand">
+      <span>Doni Ariyanto</span>
+      <span style="opacity:0.5;">//</span>
+      <span id="mode-indicator" style="color:var(--accent);">LAB_01</span>
+    </a>
+
+    <div class="hud-center-controls">
+      <button type="button" class="reality-btn" id="change-reality-btn" aria-label="Change Visual Reality Mode">
+        <span>[ CHANGE REALITY ]</span>
+      </button>
+      <i class="fa-solid fa-globe wireframe-globe" aria-hidden="true" title="Network Topology Globe"></i>
+    </div>
+
+    <div class="hud-clock" aria-live="off">
+      <div>LOCAL TIME // MALANG</div>
+      <div id="live-clock" style="font-weight:700; color:var(--accent);">IDN 00:00:00 WIB</div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       BOTTOM FLOATING NAVIGATION BAR
+       ======================================================================== -->
+  <nav class="hud-nav" aria-label="Section Navigation">
+    <a href="#top" class="active">00.HUD</a>
+    <a href="#experience">01.EXPERIENCE</a>
+    <a href="#education-skills">02.EDU &amp; SKILLS</a>
+    <a href="#projects">03.PROJECTS &amp; DOCS</a>
+    <a href="#contact">04.CONTACT</a>
+  </nav>
+
+  <!-- ========================================================================
+       HERO STAGE (Matches "REALITY, BY DESIGN." Poster Layout)
+       ======================================================================== -->
+  <main id="top">
+    <section class="hero-stage" aria-label="Interactive Network Overview">
+
+      <!-- 1. Top-Left Display Title -->
+      <div class="hero-headline-box">
+        <h1 class="hero-display-title">
+          NETWORK,<span class="title-badge">Maintenance & ProblemSloving</span><br />
+          ENGINEER.
+        </h1>
+      </div>
+
+      <!-- 2. Top-Right Definition Box -->
+      <aside class="definition-box" aria-label="Identity Specification">
+        <div class="def-header">
+          <span>DONI ARIYANTO</span>
+          <span class="code">ID // MLG-JTM</span>
+        </div>
+        <div class="def-body">
+          <div><strong>NET</strong> (NETWORK INFRASTRUCTURE)</div>
+          <div>+ <strong>Q.E.</strong> (QUALITY ENGINEERING)</div>
+          <div style="margin-top:0.35rem; color:var(--accent); font-weight:700;">
+            &rarr; HIGH-RELIABILITY CONNECTIVITY
+          </div>
+        </div>
+        <div class="def-status-bar">
+          <span>OPTIC LINK: ACTIVE</span>
+          <span class="barcode-bars" aria-hidden="true">
+            <i style="height:10px"></i><i style="height:6px"></i><i style="height:10px"></i><i style="height:4px"></i><i style="height:9px"></i><i style="height:10px"></i><i style="height:5px"></i><i style="height:10px"></i>
+          </span>
+          <span>GRADE: 89,39</span>
+        </div>
+      </aside>
+
+      <!-- 3. Left Middle Schematic Window (Live OTDR Signal Waveform) -->
+      <aside class="left-schematic-widget" aria-label="OTDR Signal Diagnostics">
+        <div class="window-bar">
+          <span>OTDR // DIAGNOSTICS</span>
+          <span>&times;</span>
+        </div>
+        <div class="schematic-content">
+          <div class="signal-canvas-box">
+            <svg viewBox="0 0 260 100" width="100%" height="100%" preserveAspectRatio="none">
+              <polyline 
+                id="otdr-wave"
+                fill="none" 
+                stroke="var(--accent)" 
+                stroke-width="2"
+                points="0,25 35,28 40,12 45,35 95,42 130,45 135,20 140,58 195,66 225,70 230,88 260,90" 
+              />
+              <circle cx="40" cy="12" r="3.5" fill="var(--text-main)" />
+              <circle cx="135" cy="20" r="3.5" fill="var(--text-main)" />
+              <text x="46" y="16" font-size="7" fill="var(--text-main)" font-family="monospace">SPLICE 0.02dB</text>
+              <text x="142" y="22" font-size="7" fill="var(--text-main)" font-family="monospace">ODP NODE</text>
+            </svg>
+          </div>
+          <div class="metric-row">
+            <span>WAVELENGTH</span>
+            <strong>1310 / 1550 nm</strong>
+          </div>
+          <div class="metric-row">
+            <span>OPTICAL POWER</span>
+            <strong id="live-dbm">-17.84 dBm</strong>
+          </div>
+          <div class="metric-row" style="border:none;">
+            <span>LINK STATUS</span>
+            <strong style="color:var(--accent);">PASS // SLA OK</strong>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 4. Centerpiece: Interactive Fiber Optic & Network Topology Core + Callout Lines -->
+      <div class="center-core-stage">
+        <div class="core-svg-wrapper">
+          <svg viewBox="0 0 900 540" role="img" aria-label="Interactive IT and Fiber Optic Network Core Diagram">
+            <defs>
+              <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.38" />
+                <stop offset="65%" stop-color="var(--accent-sec)" stop-opacity="0.08" />
+                <stop offset="100%" stop-color="var(--bg-main)" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+
+            <!-- Ambient Core Glow -->
+            <circle cx="450" cy="270" r="185" fill="url(#coreGlow)" />
+
+            <!-- Rotating Radar / Topology Rings -->
+            <circle cx="450" cy="270" r="145" class="core-pulse-ring" />
+            <circle cx="450" cy="270" r="112" class="core-pulse-ring-reverse" />
+            <circle cx="450" cy="270" r="78" fill="none" stroke="var(--line-color)" stroke-width="1" />
+
+            <!-- Central Isometric / Wireframe Network Core Cube & Fiber Strands -->
+            <g stroke="var(--line-color)" stroke-width="1.5" fill="none">
+              <!-- Outer Hexagon -->
+              <polygon points="450,175 532,222 532,318 450,365 368,318 368,222" fill="var(--bg-panel)" fill-opacity="0.55" />
+              <!-- Inner Hexagon -->
+              <polygon points="450,210 502,240 502,300 450,330 398,300 398,240" stroke="var(--accent)" stroke-width="1.8" />
+              <!-- Isometric Internal Connections -->
+              <line x1="450" y1="175" x2="450" y2="270" />
+              <line x1="532" y1="222" x2="450" y2="270" />
+              <line x1="532" y1="318" x2="450" y2="270" />
+              <line x1="450" y1="365" x2="450" y2="270" />
+              <line x1="368" y1="318" x2="450" y2="270" />
+              <line x1="368" y1="222" x2="450" y2="270" />
+            </g>
+
+            <!-- Glowing Center Core Node -->
+            <circle cx="450" cy="270" r="16" fill="var(--accent)" />
+            <circle cx="450" cy="270" r="6" fill="var(--bg-main)" />
+
+            <!-- Vertex Nodes -->
+            <circle cx="450" cy="175" r="5" fill="var(--text-main)" />
+            <circle cx="532" cy="222" r="5" fill="var(--accent)" />
+            <circle cx="532" cy="318" r="5" fill="var(--text-main)" />
+            <circle cx="450" cy="365" r="5" fill="var(--accent)" />
+            <circle cx="368" cy="318" r="5" fill="var(--text-main)" />
+            <circle cx="368" cy="222" r="5" fill="var(--accent)" />
+
+            <!-- ============================================================
+                 TECHNICAL CALLOUT LINES
+                 ============================================================ -->
+
+            <!-- Callout 1: Top-Left (FTTH & GPON Infrastructure) -->
+            <polyline class="svg-callout-line" points="368,222 295,165 165,165" />
+            <rect x="361" y="215" width="14" height="14" class="svg-node-box" />
+            <text x="165" y="148" class="svg-callout-text">FTTH &amp; GPON ARCHITECTURE</text>
+            <text x="165" y="159" class="svg-callout-sub">OLT &bull; ODC &bull; ODP &bull; ONT/ONU CONFIG</text>
+
+            <!-- Callout 2: Top-Center/Right (Quality Engineering) -->
+            <polyline class="svg-callout-line" points="450,175 495,110 625,110" />
+            <rect x="443" y="168" width="14" height="14" class="svg-node-box" />
+            <text x="505" y="93" class="svg-callout-text">QUALITY ENGINEERING &amp; SLA</text>
+            <text x="505" y="104" class="svg-callout-sub">INFRASTRUCTURE INSPECTION &amp; AUDIT</text>
+
+            <!-- Callout 3: Right-Middle (Optical Power & Splicing) -->
+            <polyline class="svg-callout-line" points="532,265 610,265 650,235 735,235" />
+            <rect x="525" y="258" width="14" height="14" class="svg-node-box" />
+            <text x="615" y="218" class="svg-callout-text">FIBER OPTIC DIAGNOSTICS</text>
+            <text x="615" y="229" class="svg-callout-sub">OPM &bull; OTDR &bull; VFL &bull; FUSION SPLICER</text>
+
+            <!-- Callout 4: Bottom-Right (IP Subnetting & Routing) -->
+            <polyline class="svg-callout-line" points="490,342 545,415 665,415" />
+            <rect x="483" y="335" width="14" height="14" class="svg-node-box" />
+            <text x="550" y="398" class="svg-callout-text">IP ADDRESSING &amp; SUBNETTING</text>
+            <text x="550" y="409" class="svg-callout-sub">ROUTER CONFIG &amp; NETWORK STABILITY</text>
+
+            <!-- Callout 5: Bottom-Left (Hardware & OS Support) -->
+            <polyline class="svg-callout-line" points="368,318 295,380 185,380" />
+            <rect x="361" y="311" width="14" height="14" class="svg-node-box" />
+            <text x="185" y="363" class="svg-callout-text">SYSTEM &amp; HARDWARE ADMIN</text>
+            <text x="185" y="374" class="svg-callout-sub">OS DEPLOYMENT &bull; TROUBLESHOOTING</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 5. Right Middle Telemetry Box -->
+      <aside class="right-telemetry-widget" aria-label="Network Performance Telemetry">
+        <div class="window-bar">
+          <span>FIELD TOOLS &amp; METRICS</span>
+          <span>SYS-OK</span>
+        </div>
+        <div class="schematic-content">
+          <div style="display:flex; justify-content:space-between; font-size:0.62rem; margin-bottom:0.25rem;">
+            <span>EQUIPMENT READINESS</span>
+            <span>100%</span>
+          </div>
+          <div class="bars-chart">
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 88%;"></div>
+              <span class="bar-label">OPM</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 94%;"></div>
+              <span class="bar-label">OTDR</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 82%;"></div>
+              <span class="bar-label">VFL</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 96%;"></div>
+              <span class="bar-label">SPLICE</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 90%;"></div>
+              <span class="bar-label">CLEAVE</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 92%;"></div>
+              <span class="bar-label">ONT</span>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding-top:0.55rem; font-size:0.65rem;">
+            <span>UPTIME TARGET</span>
+            <strong style="color:var(--accent);">99.98% SLA</strong>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 6. Bottom-Left: [ CORE THREADS OF MY WORK ] -->
+      <div class="core-threads-box">
+        <div class="threads-heading">[ CORE THREADS OF MY WORK ]</div>
+
+        <div class="thread-item">
+          <div class="thread-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div>
+          <div>
+            <span class="thread-meta">01. (FTTH/GPON) //////////////////</span>
+            <span class="thread-name">NETWORK INFRASTRUCTURE</span>
+          </div>
+        </div>
+
+        <div class="thread-item">
+          <div class="thread-icon"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
+          <div>
+            <span class="thread-meta">02. (Q.E. AUDIT) /////////////////</span>
+            <span class="thread-name">NETWORK QUALITY CONTROL</span>
+          </div>
+        </div>
+
+        <div class="thread-item">
+          <div class="thread-icon"><i class="fa-solid fa-wave-square" aria-hidden="true"></i></div>
+          <div>
+            <span class="thread-meta">03. (OTDR/OPM) ///////////////////</span>
+            <span class="thread-name">FIBER OPTIC TROUBLESHOOTING</span>
+          </div>
+        </div>
+
+        <div class="thread-item">
+          <div class="thread-icon"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
+          <div>
+            <span class="thread-meta">04. (HARDWARE/OS) ////////////////</span>
+            <span class="thread-name">SYSTEM &amp; DEVICE SUPPORT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Bottom-Right: [ NOT A STUDIO - JUST ME ] Bio Box -->
+      <div class="bio-window-box">
+        <div class="bio-window">
+          <div class="window-bar">
+            <span>NOT AN AGENCY &mdash; JUST ME</span>
+            <span>[DA]</span>
+          </div>
+          <p class="bio-text">
+            I'm <strong>Doni Ariyanto</strong>, an IT &amp; Telecommunications Professional based in Pujon, Malang. Experienced in network installation, maintenance, troubleshooting, quality monitoring, and field operations through roles at <strong>PT Lintas Data Prima</strong>, <strong>PT Profesional Telekomunikasi Indonesia</strong>, and <strong>CV Ronggolawe Komputer</strong>.
+          </p>
+        </div>
+        <div class="bio-pills">
+          <a href="mailto:doniariyanto205@gmail.com" class="bio-pill">EMAIL</a>
+          <a href="https://wa.me/62895395168526" class="bio-pill">WHATSAPP</a>
+          <a href="#projects" class="bio-pill">FIELD PHOTOS</a>
+          <a href="#contact" class="bio-pill">CONTACT</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         FULL CV SECTIONS BELOW THE FOLD (Styled as Technical Schematics)
+         ====================================================================== -->
+    <div class="cv-container">
+
+      <!-- SECTION 01: WORK EXPERIENCE -->
+      <section class="schematic-section" id="experience" aria-labelledby="exp-heading">
+        <div class="schematic-section-header">
+          <h2 class="schematic-section-title" id="exp-heading">01 // WORK EXPERIENCE LOGS</h2>
+          <span class="schematic-code">REVERSE CHRONOLOGICAL [3 ROLES]</span>
+        </div>
+
+        <div class="exp-grid">
+          <!-- Role 1: PT. Lintas Data Prima -->
+          <article class="exp-node">
+            <div class="exp-meta-top">
+              <span class="exp-date-tag">JUNE 2026 &ndash; NOW</span>
+              <span>SURABAYA // ID</span>
+            </div>
+            <div>
+              <h3 class="exp-role">Field Technician</h3>
+              <div class="exp-company">PT. Lintas Data Prima (CMV)</div>
+            </div>
+            <ul class="exp-list">
+              <li>Perform installation, activation, and maintenance of fiber-optic (FTTH) internet services.</li>
+              <li>Configure ONT/ONU, routers, and network devices according to customer requirements.</li>
+              <li>Troubleshoot network issues and ensure service returns to normal within the target resolution time.</li>
+              <li>Conducting signal quality measurements and equipment checks to maintain service stability.</li>
+              <li>Coordinate with the operations team to handle service disruptions and ensure customer satisfaction through professional service.</li>
+            </ul>
+          </article>
+
+          <!-- Role 2: PT. Profesional Telekomunikasi Indonesia -->
+          <article class="exp-node">
+            <div class="exp-meta-top">
+              <span class="exp-date-tag">JULY 2025 &ndash; JAN 2026</span>
+              <span>SURABAYA // ID</span>
+            </div>
+            <div>
+              <h3 class="exp-role">Quality Engineer</h3>
+              <div class="exp-company">PT. Profesional Telekomunikasi Indonesia</div>
+            </div>
+            <ul class="exp-list">
+              <li>Conducted network quality inspections and performance monitoring to ensure reliable telecommunications services and compliance with operational standards.</li>
+              <li>Performed field inspections and quality assessments of telecommunication infrastructure, identifying potential issues that could affect network performance.</li>
+              <li>Analyzed network and service performance data to identify abnormalities, troubleshoot issues, and support continuous network improvement.</li>
+              <li>Conducted troubleshooting and verification of network-related issues, coordinating with technical teams to ensure timely resolution and service restoration.</li>
+              <li>Monitored fiber optic network conditions, including optical power levels and connection quality, to maintain stable and reliable network performance.</li>
+              <li>Prepared inspection reports and documented findings, corrective actions, and quality results to support operational evaluation and improvement.</li>
+            </ul>
+          </article>
+
+          <!-- Role 3: CV. Ronggolawe Computer -->
+          <article class="exp-node">
+            <div class="exp-meta-top">
+              <span class="exp-date-tag">JAN 2022 &ndash; DEC 2023</span>
+              <span>DAU, MALANG // ID</span>
+            </div>
+            <div>
+              <h3 class="exp-role">Technician (Apprenticeship)</h3>
+              <div class="exp-company">CV. Ronggolawe Computer</div>
+            </div>
+            <ul class="exp-list">
+              <li>Performed computer hardware and software installation, maintenance, and troubleshooting to ensure optimal device performance.</li>
+              <li>Diagnosed and resolved hardware and software issues, including operating system errors, driver problems, and peripheral malfunctions.</li>
+              <li>Assisted in assembling, upgrading, and configuring desktop computers, laptops, and computer peripherals based on customer requirements.</li>
+              <li>Installed and configured operating systems, applications, drivers, and essential system utilities.</li>
+              <li>Provided technical support and assistance to customers by identifying issues and delivering appropriate solutions.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION 02: EDUCATION & TECHNICAL ARSENAL -->
+      <section class="schematic-section" id="education-skills" aria-labelledby="edu-heading">
+        <div class="schematic-section-header">
+          <h2 class="schematic-section-title" id="edu-heading">02 // EDUCATION &amp; TECHNICAL ARSENAL</h2>
+          <span class="schematic-code">ACADEMIC &amp; FIELD MATRIX</span>
+        </div>
+
+        <div class="edu-skills-grid">
+          <!-- Education Column -->
+          <div class="edu-pane">
+            <div class="skill-group-title">ACADEMIC RECORD</div>
+            <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:0.35rem;">
+              JULY 2020 &ndash; MARET 2023 // MALANG, EAST JAVA
+            </p>
+            <h3 class="exp-role" style="margin-bottom:0.25rem;">SMK PGRI 3 Malang</h3>
+            <p class="exp-company" style="margin-bottom:1rem;">Computer Network Engineering</p>
+            <p style="font-size:0.78rem; line-height:1.6; margin-bottom:1rem;">
+              <strong>Relevant Coursework:</strong> Computer Networking, Network Administration, Hardware &amp; Software Troubleshooting, Telecommunications, and System Administration.
+            </p>
+            <div style="display:inline-block; border:1px solid var(--border-color); padding:0.45rem 0.85rem; background:var(--bg-main); font-weight:700; font-size:0.8rem;">
+              AVERAGE GRADE: <span style="color:var(--accent);">89,39</span>
+            </div>
+          </div>
+
+          <!-- Skills Column -->
+          <div class="skills-pane">
+            <div>
+              <div class="skill-group-title">NETWORKING SKILLS</div>
+              <div class="chip-list">
+                <span class="tech-chip">Network Infrastructure</span>
+                <span class="tech-chip">FTTH Installation &amp; Maintenance</span>
+                <span class="tech-chip">Fiber Optic Troubleshooting</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="skill-group-title">TECHNICAL SPECIFICATIONS</div>
+              <div class="chip-list">
+                <span class="tech-chip">Network Maintenance &amp; Troubleshooting</span>
+                <span class="tech-chip">Fiber Optic</span>
+                <span class="tech-chip">GPON/FTTH Network</span>
+                <span class="tech-chip">IP Addressing &amp; Subnetting</span>
+                <span class="tech-chip">OLT, ODC, ODP &amp; ONT/ONU</span>
+                <span class="tech-chip">Network Quality Control</span>
+                <span class="tech-chip">Technical Problem Solving</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="skill-group-title">FIELD &amp; DIAGNOSTIC TOOLS</div>
+              <div class="chip-list">
+                <span class="tech-chip">Optical Power Meter (OPM)</span>
+                <span class="tech-chip">OTDR</span>
+                <span class="tech-chip">VFL</span>
+                <span class="tech-chip">Fusion Splicer</span>
+                <span class="tech-chip">Fiber Cleaver</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 03: FEATURED PROJECTS & FIELD DOCUMENTATION GALLERY -->
+      <section class="schematic-section" id="projects" aria-labelledby="proj-heading">
+        <div class="schematic-section-header">
+          <h2 class="schematic-section-title" id="proj-heading">03 // FIELD DEPLOYMENTS &amp; WORK DOCUMENTATION</h2>
+          <span class="schematic-code">VERIFIED FIELD LOGS [9 PHOTOS]</span>
+        </div>
+
+        <!-- Highlighted Case Studies -->
+        <div class="projects-schematic-grid">
+          <!-- Project 1 -->
+          <article class="project-node">
+            <div class="project-diagram-preview">
+              <svg viewBox="0 0 240 90" width="85%" height="85%">
+                <rect x="10" y="30" width="40" height="30" fill="none" stroke="var(--border-color)" stroke-width="1.5"/>
+                <text x="17" y="48" font-size="8" fill="var(--text-main)" font-family="monospace">ZTE</text>
+                <line x1="50" y1="45" x2="100" y2="45" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 2"/>
+                <circle cx="115" cy="45" r="15" fill="none" stroke="var(--border-color)" stroke-width="1.5"/>
+                <text x="105" y="48" font-size="7" fill="var(--text-main)" font-family="monospace">IPRAN</text>
+                <line x1="130" y1="45" x2="180" y2="45" stroke="var(--accent)" stroke-width="2"/>
+                <rect x="180" y="30" width="45" height="30" fill="none" stroke="var(--border-color)" stroke-width="1.5"/>
+                <text x="190" y="48" font-size="8" fill="var(--text-main)" font-family="monospace">CISCO</text>
+              </svg>
+            </div>
+            <div class="exp-meta-top">
+              <span>CASE // 001</span>
+              <span>IP RAN &amp; RECTIFIER CABINET</span>
+            </div>
+            <h3 class="exp-role" style="font-size:1.05rem;">Proposed IP RAN &amp; ZTE/Cisco Cabinet Audit</h3>
+            <p style="font-size:0.76rem; line-height:1.55; color:var(--text-muted);">
+              Inspeksi kualitas infrastruktur kabinet telekomunikasi, integrasi perangkat ZTE &amp; router Cisco (Proposed IP RAN), manajemen kabel patch cord, serta pengecekan panel distribusi daya DC/MCB.
+            </p>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-node">
+            <div class="project-diagram-preview">
+              <svg viewBox="0 0 240 90" width="85%" height="85%">
+                <polyline points="15,70 55,65 85,20 115,60 165,30 220,35" fill="none" stroke="var(--accent)" stroke-width="2"/>
+                <line x1="15" y1="75" x2="225" y2="75" stroke="var(--border-color)" stroke-width="1"/>
+                <text x="60" y="15" font-size="7" fill="var(--text-main)" font-family="monospace">CORE RACK // SLA PASS</text>
+              </svg>
+            </div>
+            <div class="exp-meta-top">
+              <span>CASE // 002</span>
+              <span>CORE SERVER RACK &amp; FIBER LINK</span>
+            </div>
+            <h3 class="exp-role" style="font-size:1.05rem;">Data Center Rack &amp; Fiber Optic Termination</h3>
+            <p style="font-size:0.76rem; line-height:1.55; color:var(--text-muted);">
+              Instalasi, pelabelan, dan verifikasi redaman jalur serat optik pada rak server ganda (CommScope, Fiberlink/iForte jalur Randengansari Gresik) untuk menjamin kestabilan koneksi backbone.
+            </p>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-node">
+            <div class="project-diagram-preview">
+              <svg viewBox="0 0 240 90" width="85%" height="85%">
+                <circle cx="120" cy="45" r="28" fill="none" stroke="var(--border-color)" stroke-width="1.5" stroke-dasharray="5 3"/>
+                <circle cx="120" cy="45" r="8" fill="var(--accent)"/>
+                <line x1="40" y1="20" x2="120" y2="45" stroke="var(--border-color)"/>
+                <line x1="200" y1="20" x2="120" y2="45" stroke="var(--border-color)"/>
+                <line x1="40" y1="70" x2="120" y2="45" stroke="var(--border-color)"/>
+                <line x1="200" y1="70" x2="120" y2="45" stroke="var(--border-color)"/>
+              </svg>
+            </div>
+            <div class="exp-meta-top">
+              <span>CASE // 003</span>
+              <span>MARITIME NAVCOM &amp; ANTENNA</span>
+            </div>
+            <h3 class="exp-role" style="font-size:1.05rem;">Shipboard Navigation &amp; Communication System</h3>
+            <p style="font-size:0.76rem; line-height:1.55; color:var(--text-muted);">
+              Dokumentasi inspeksi lapangan pada anjungan kapal (PK NAVKOM), pengecekan konsol navigasi-komunikasi, serta infrastruktur antena radar dan telekomunikasi eksternal di atas dek kapal.
+            </p>
+          </article>
+        </div>
+
+        <!-- Field Documentation Photo Matrix Sub-Header & Filter -->
+        <div class="doc-sub-header">
+          <div class="doc-sub-title">
+            <i class="fa-solid fa-camera-retro" aria-hidden="true"></i>
+            <span>VISUAL EVIDENCE // DOKUMENTASI HASIL KERJA LAPANGAN</span>
+          </div>
+          <div class="doc-filter-bar" role="group" aria-label="Filter Dokumentasi Kerja">
+            <button type="button" class="doc-filter-btn active" data-filter="all">ALL LOGS (9)</button>
+            <button type="button" class="doc-filter-btn" data-filter="ipran">IP RAN &amp; CABINET (3)</button>
+            <button type="button" class="doc-filter-btn" data-filter="rack">SERVER &amp; FIBER RACK (3)</button>
+            <button type="button" class="doc-filter-btn" data-filter="maritime">MARITIME NAVCOM (3)</button>
+          </div>
+        </div>
+
+        <!-- Photo Grid (k2.jpeg to k10.jpeg) -->
+        <div class="doc-gallery-grid" id="doc-gallery">
+
+          <!-- Photo 1: k5.jpeg -->
+          <article class="doc-card" data-category="ipran" data-img="k5.jpeg" data-code="DOC // K05" data-title="PROPOSED IP RAN CABINET INTEGRATION" data-desc="Integrasi perangkat ZTE, switch/router Cisco, manajemen kabel patch cord, GPS port, serta panel distribusi daya DC/MCB pada kabinet Proposed IP RAN.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K05 &bull; IP RAN</span>
+              <img src="k5.jpeg" alt="Dokumentasi kabinet Proposed IP RAN dengan perangkat ZTE dan Cisco" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K5.JPEG</span>
+                <span>ZTE &bull; CISCO &bull; DC MCB</span>
+              </div>
+              <h4 class="doc-title">Proposed IP RAN Cabinet Integration</h4>
+              <p class="doc-desc">Instalasi dan pengecekan kabinet telekomunikasi ZTE/Cisco beserta pelabelan jalur Proposed IP RAN dan sistem power rectifier.</p>
+            </div>
+          </article>
+
+          <!-- Photo 2: k6.jpeg -->
+          <article class="doc-card" data-category="rack" data-img="k6.jpeg" data-code="DOC // K06" data-title="FIBERLINK & iFORTE BACKBONE RACK" data-desc="Manajemen ODF/patch panel Fiberlink iForte (jalur Randengansari Gresik), terminasi patch cord optik kuning, serta verifikasi perangkat transmisi aktif.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K06 &bull; FIBER BACKBONE</span>
+              <img src="k6.jpeg" alt="Dokumentasi rak perangkat jaringan Fiberlink iForte dan kabel fiber optik" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K6.JPEG</span>
+                <span>FIBERLINK &bull; iFORTE</span>
+              </div>
+              <h4 class="doc-title">Fiberlink &amp; iForte Backbone Rack</h4>
+              <p class="doc-desc">Penataan patch cord serat optik, terminasi ODF (Randengansari Gresik), dan pemeliharaan perangkat switch/router di rak utama.</p>
+            </div>
+          </article>
+
+          <!-- Photo 3: k7.jpeg -->
+          <article class="doc-card" data-category="rack" data-img="k7.jpeg" data-code="DOC // K07" data-title="DUAL CORE RACK & COMMSCOPE PATCHING" data-desc="Tampilan penuh dual rack server berisi manajemen kabel CommScope, perangkat switch/router multi-chassis, distribusi optik, dan panel MCB.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K07 &bull; CORE RACK</span>
+              <img src="k7.jpeg" alt="Dokumentasi dual server rack CommScope dan perangkat jaringan aktif" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K7.JPEG</span>
+                <span>COMMSCOPE &bull; CORE</span>
+              </div>
+              <h4 class="doc-title">Dual Core Rack &amp; CommScope Patching</h4>
+              <p class="doc-desc">Audit fisik dan kerapian jalur kabel serat optik serta UTP pada rak ganda CommScope di ruang perangkat utama.</p>
+            </div>
+          </article>
+
+          <!-- Photo 4: k8.jpeg -->
+          <article class="doc-card" data-category="rack" data-img="k8.jpeg" data-code="DOC // K08" data-title="ACTIVE OPTICAL PORT & SWITCH VERIFICATION" data-desc="Inspeksi jarak dekat indikator LED port SFP/optik, pelabelan kabel patch cord, serta pemantauan status operasional perangkat pada rak CommScope.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K08 &bull; SFP VERIFY</span>
+              <img src="k8.jpeg" alt="Inspeksi jarak dekat indikator port optik dan switch pada rak CommScope" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K8.JPEG</span>
+                <span>OPTICAL SFP &bull; SLA</span>
+              </div>
+              <h4 class="doc-title">Active Optical Port &amp; Switch Verification</h4>
+              <p class="doc-desc">Pengecekan status link aktif, modul SFP, dan pelabelan patch cord untuk memastikan kualitas layanan sesuai standar SLA.</p>
+            </div>
+          </article>
+
+          <!-- Photo 5: k9.jpeg -->
+          <article class="doc-card" data-category="ipran" data-img="k9.jpeg" data-code="DOC // K09" data-title="ZTE OPTICAL CHASSIS & DC POWER DISTRIBUTION" data-desc="Pemeriksaan modul ZTE, kerapian bundel kabel transmisi biru, sistem grounding, dan panel rectifier/MCB pada kabinet telekomunikasi.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K09 &bull; ZTE NODE</span>
+              <img src="k9.jpeg" alt="Dokumentasi kabinet ZTE dan panel power distribusi MCB" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K9.JPEG</span>
+                <span>ZTE &bull; RECTIFIER</span>
+              </div>
+              <h4 class="doc-title">ZTE Chassis &amp; DC Power Distribution</h4>
+              <p class="doc-desc">Monitoring kondisi fisik perangkat ZTE, jalur kabel grounding, serta kestabilan catu daya DC dan MCB di dalam kabinet.</p>
+            </div>
+          </article>
+
+          <!-- Photo 6: k10.jpeg -->
+          <article class="doc-card" data-category="ipran" data-img="k10.jpeg" data-code="DOC // K10" data-title="TELECOM CABINET WIRING & LABEL AUDIT" data-desc="Dokumentasi kelengkapan label kabel (tag identifikasi port), terminasi serat optik bawah, serta kesiapan sistem cadangan daya pada kabinet ZTE.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K10 &bull; QA AUDIT</span>
+              <img src="k10.jpeg" alt="Audit pelabelan kabel dan terminasi optik pada kabinet telekomunikasi" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K10.JPEG</span>
+                <span>QUALITY AUDIT</span>
+              </div>
+              <h4 class="doc-title">Telecom Cabinet Wiring &amp; Label Audit</h4>
+              <p class="doc-desc">Dokumentasi hasil akhir penataan kabel, kelengkapan label port, dan verifikasi kualitas koneksi serat optik.</p>
+            </div>
+          </article>
+
+          <!-- Photo 7: k2.jpeg -->
+          <article class="doc-card" data-category="maritime" data-img="k2.jpeg" data-code="DOC // K02" data-title="FIELD SAFETY GEAR // DONI ARIYANTO" data-desc="APD helm proyek resmi berlabel DONI ARIYANTO saat bertugas melakukan inspeksi dan pemeliharaan sistem navigasi-komunikasi di ruang anjungan kapal.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K02 &bull; ENGINEER ID</span>
+              <img src="k2.jpeg" alt="Helm proyek Doni Ariyanto di ruang anjungan navigasi komunikasi kapal" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K2.JPEG</span>
+                <span>HSE &bull; ON-SITE ID</span>
+              </div>
+              <h4 class="doc-title">Field Engineer Identity &amp; HSE</h4>
+              <p class="doc-desc">Verifikasi kehadiran kerja lapangan (Doni Ariyanto) dengan perlengkapan keselamatan standar di ruang anjungan kapal.</p>
+            </div>
+          </article>
+
+          <!-- Photo 8: k4.jpeg -->
+          <article class="doc-card" data-category="maritime" data-img="k4.jpeg" data-code="DOC // K04" data-title="SHIPBOARD BRIDGE & PK NAVKOM CONSOLE" data-desc="Dokumentasi ruang anjungan kapal yang mencakup konsol PK NAVKOM (Navigasi & Komunikasi), layar monitor sistem, dan panel instrumen kontrol.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K04 &bull; PK NAVKOM</span>
+              <img src="k4.jpeg" alt="Ruang anjungan kapal dan konsol PK NAVKOM" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K4.JPEG</span>
+                <span>NAVKOM CONSOLE</span>
+              </div>
+              <h4 class="doc-title">Shipboard Bridge &amp; PK NavCom Console</h4>
+              <p class="doc-desc">Pemeriksaan kesiapan perangkat keras workstation, layar monitor radar, dan panel komunikasi-navigasi (PK NAVKOM).</p>
+            </div>
+          </article>
+
+          <!-- Photo 9: k3.jpeg -->
+          <article class="doc-card" data-category="maritime" data-img="k3.jpeg" data-code="DOC // K03" data-title="EXTERIOR RADAR MAST & SATCOM DOME" data-desc="Inspeksi infrastruktur luar pada dek kapal yang meliputi radome satelit, antena sektor/telekomunikasi, dan tiang radar utama.">
+            <div class="doc-img-box">
+              <span class="doc-hud-badge">LOG // K03 &bull; RADAR &amp; SAT</span>
+              <img src="k3.jpeg" alt="Infrastruktur antena radar dan satelit di atas dek kapal" loading="lazy" />
+              <span class="doc-zoom-icon"><i class="fa-solid fa-expand"></i></span>
+            </div>
+            <div class="doc-info">
+              <div class="doc-meta-line">
+                <span>FILE: K3.JPEG</span>
+                <span>OUTDOOR ANTENNA</span>
+              </div>
+              <h4 class="doc-title">Exterior Radar Mast &amp; SatCom Dome</h4>
+              <p class="doc-desc">Dokumentasi fisik instalasi antena eksternal, radome komunikasi satelit, dan jalur perkabelan outdoor di dek kapal.</p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- SECTION 04: CONTACT TERMINAL -->
+      <section class="schematic-section" id="contact" aria-labelledby="contact-heading">
+        <div class="schematic-section-header">
+          <h2 class="schematic-section-title" id="contact-heading">04 // TRANSMISSION &amp; CONTACT</h2>
+          <span class="schematic-code">DIRECT LINK // READY</span>
+        </div>
+
+        <div class="contact-schematic-grid">
+          <div class="contact-direct-pane">
+            <div>
+              <div class="skill-group-title">COMMUNICATION CHANNELS</div>
+              <div class="terminal-row">
+                <span class="terminal-label">OPERATOR NAME</span>
+                <strong>DONI ARIYANTO</strong>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-label">BASE COORDINATES</span>
+                <strong>Pujon, Malang - East Java, Indonesia</strong>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-label">ELECTRONIC MAIL</span>
+                <a href="mailto:doniariyanto205@gmail.com" style="color:var(--accent); font-weight:700;">doniariyanto205@gmail.com</a>
+              </div>
+              <div class="terminal-row">
+                <span class="terminal-label">PHONE / WHATSAPP</span>
+                <a href="tel:+62895395168526" style="font-weight:700;">0895395168526</a>
+              </div>
+              <div class="terminal-row" style="border:none;">
+                <span class="terminal-label">EXTERNAL PROFILES</span>
+                <div class="bio-pills" style="margin-top:0.4rem;">
+                  <a href="[Insert LinkedIn URL]" class="bio-pill">LINKEDIN</a>
+                  <a href="#projects" class="bio-pill">DOCUMENTATION</a>
+                  <a href="https://wa.me/62895395168526" class="bio-pill">WHATSAPP</a>
+                </div>
+              </div>
+            </div>
+
+            <div style="font-size:0.68rem; color:var(--text-muted);">
+              STATUS: READY TO CONTRIBUTE IN A DYNAMIC AND PROFESSIONAL ENVIRONMENT.
+            </div>
+          </div>
+
+          <div class="contact-form-pane">
+            <div class="skill-group-title">SEND DIRECT TRANSMISSION</div>
+            <form action="https://formspree.io/f/[Insert_Formspree_ID]" method="POST">
+              <label for="sender-name" class="terminal-label">01. SENDER IDENTIFIER (NAME)</label>
+              <input type="text" id="sender-name" name="name" class="hud-input" placeholder="Enter your name / company..." required />
+
+              <label for="sender-email" class="terminal-label">02. RETURN ADDRESS (EMAIL)</label>
+              <input type="email" id="sender-email" name="email" class="hud-input" placeholder="name@company.com" required />
+
+              <label for="sender-msg" class="terminal-label">03. PAYLOAD (MESSAGE)</label>
+              <textarea id="sender-msg" name="message" rows="4" class="hud-input" placeholder="Specify role, project, or technical inquiry..." required></textarea>
+
+              <button type="submit" class="hud-submit-btn">
+                [ TRANSMIT MESSAGE // SEND ]
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       HUD LIGHTBOX MODAL FOR FULL-SCREEN PHOTO INSPECTION
+       ======================================================================== -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+    <div class="lightbox-window">
+      <div class="window-bar">
+        <span id="lightbox-code">DOC // VIEWER</span>
+        <button type="button" class="lightbox-close-btn" id="lightbox-close" aria-label="Close Preview">[ CLOSE &times; ]</button>
+      </div>
+      <div class="lightbox-body">
+        <div class="lightbox-img-container">
+          <img src="" alt="Full size work documentation" id="lightbox-img" />
+        </div>
+        <div class="lightbox-details">
+          <div>
+            <div class="skill-group-title">TECHNICAL INSPECTION LOG</div>
+            <h3 class="exp-role" id="lightbox-title" style="font-size:1.15rem; margin-bottom:0.65rem;">DOCUMENTATION TITLE</h3>
+            <p id="lightbox-desc" style="font-size:0.78rem; line-height:1.6; color:var(--text-muted); margin-bottom:1.2rem;"></p>
+            <div class="terminal-row">
+              <span class="terminal-label">ENGINEER IN CHARGE</span>
+              <strong>DONI ARIYANTO</strong>
+            </div>
+            <div class="terminal-row">
+              <span class="terminal-label">VERIFICATION STATUS</span>
+              <strong style="color:var(--accent);">PASSED // DOCUMENTED ON-SITE</strong>
+            </div>
+          </div>
+          <button type="button" class="hud-submit-btn" id="lightbox-close-bottom">
+            [ RETURN TO PORTFOLIO ]
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       INTERACTIVE HUD SCRIPTS
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. Cycle through the 3 Visual Realities
+      const realities = [
+        { id: 'lab', label: 'LAB_01' },
+        { id: 'cyber', label: 'CYBER_02' },
+        { id: 'blueprint', label: 'BLUEPRINT_03' }
+      ];
+      let currentRealityIndex = 0;
+
+      const root = document.documentElement;
+      const realityBtn = document.getElementById('change-reality-btn');
+      const modeIndicator = document.getElementById('mode-indicator');
+
+      if (realityBtn) {
+        realityBtn.addEventListener('click', () => {
+          currentRealityIndex = (currentRealityIndex + 1) % realities.length;
+          const nextReality = realities[currentRealityIndex];
+          root.setAttribute('data-reality', nextReality.id);
+          if (modeIndicator) {
+            modeIndicator.textContent = nextReality.label;
+          }
+        });
+      }
+
+      // 2. Live Malang Local Time Clock (WIB / UTC+7)
+      const clockEl = document.getElementById('live-clock');
+      function updateClock() {
+        if (!clockEl) return;
+        const now = new Date();
+        const options = {
+          timeZone: 'Asia/Jakarta',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        };
+        const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+        clockEl.textContent = `MLG ${timeString}`;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      // 3. Subtle Live Optical Power Fluctuation Simulation (-17.8x dBm)
+      const dbmEl = document.getElementById('live-dbm');
+      setInterval(() => {
+        if (!dbmEl) return;
+        const jitter = (Math.random() * 0.14 - 0.07).toFixed(2);
+        const val = (-17.85 + parseFloat(jitter)).toFixed(2);
+        dbmEl.textContent = `${val} dBm`;
+      }, 2400);
+
+      // 4. Documentation Gallery Category Filter
+      const filterBtns = document.querySelectorAll('.doc-filter-btn');
+      const docCards = document.querySelectorAll('.doc-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filterValue = btn.getAttribute('data-filter');
+          docCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filterValue === 'all' || category === filterValue) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // 5. Lightbox Modal Logic
+      const modal = document.getElementById('lightbox-modal');
+      const modalImg = document.getElementById('lightbox-img');
+      const modalCode = document.getElementById('lightbox-code');
+      const modalTitle = document.getElementById('lightbox-title');
+      const modalDesc = document.getElementById('lightbox-desc');
+      const closeBtnTop = document.getElementById('lightbox-close');
+      const closeBtnBottom = document.getElementById('lightbox-close-bottom');
+
+      docCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const imgSrc = card.getAttribute('data-img');
+          const code = card.getAttribute('data-code');
+          const title = card.getAttribute('data-title');
+          const desc = card.getAttribute('data-desc');
+
+          if (modalImg) modalImg.src = imgSrc;
+          if (modalCode) modalCode.textContent = code;
+          if (modalTitle) modalTitle.textContent = title;
+          if (modalDesc) modalDesc.textContent = desc;
+
+          if (modal) modal.classList.add('open');
+        });
+      });
+
+      function closeLightbox() {
+        if (modal) modal.classList.remove('open');
+        if (modalImg) modalImg.src = '';
+      }
+
+      if (closeBtnTop) closeBtnTop.addEventListener('click', closeLightbox);
+      if (closeBtnBottom) closeBtnBottom.addEventListener('click', closeLightbox);
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeLightbox();
+        });
+      }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    })();
+  </script>
+</body>
+</html>
